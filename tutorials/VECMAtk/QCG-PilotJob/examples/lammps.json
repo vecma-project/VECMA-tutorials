@@ -1,0 +1,45 @@
+[
+  {
+    "request": "submit",
+    "jobs": [
+      {
+        "name": "lammps-colloid",
+        "execution": {
+          "exec": "lammps",
+          "stdin": "/home/jovyan/tutorials/VECMAtk/QCG-PilotJob/examples/lammps-colloid/in.colloid",
+          "stdout": "lammps.out",
+          "wd": "lammps"
+        }
+      },
+      {
+        "name": "rename-images",
+        "execution": {
+          "script": "for i in image.*.jpg; do alt_name=`echo $i | sed 's/00.jpg/.jpg/'`; echo \"$i -> $alt_name\"; mv $i $alt_name; done",
+          "wd": "lammps"
+        },
+        "dependencies": { "after": [ "lammps-colloid" ] }
+      },
+      {
+        "name": "create-movie",
+        "execution": {
+          "exec": "ffmpeg",
+          "args": ["-r", "25", "-i", "image.%03d.jpg", "-c:v", "libx264", "-vf", "fps=15,format=yuv420p", "colloid.mp4"],
+          "wd": "lammps"
+        },
+        "dependencies": { "after": [ "rename-images" ] }
+      },
+      {
+        "name": "cleanup",
+        "execution": {
+          "script": "rm -fR image.*.jpg",
+          "wd": "lammps"
+        },
+        "dependencies": { "after": [ "create-movie" ] }
+      }
+    ]
+  },
+  {
+    "request": "control",
+    "command": "finishAfterAllTasksDone"
+  }
+]
