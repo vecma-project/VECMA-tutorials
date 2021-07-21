@@ -1,2 +1,2 @@
 # VECMA-tutorials
-Repository containing tutorial materials for the VECMA project, particularly for VECMAtk
+Repository containing tutorial materials for the VECMAtk components
