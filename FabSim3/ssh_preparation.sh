@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export PS1="\e[1;32m\w\[\033[00m\] $ "
+
+
 PORT=2222
 
 /usr/sbin/sshd -f /etc/ssh-jovyan/sshd_config
