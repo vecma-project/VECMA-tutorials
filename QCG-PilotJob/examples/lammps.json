@@ -6,7 +6,7 @@
         "name": "lammps-colloid",
         "execution": {
           "exec": "lammps",
-          "stdin": "/home/jovyan/tutorials/VECMAtk/QCG-PilotJob/examples/lammps-colloid/in.colloid",
+          "stdin": "/home/jovyan/tutorials/QCG-PilotJob/examples/lammps-colloid/in.colloid",
           "stdout": "lammps.out",
           "wd": "lammps"
         }
